@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0">
+
+<title>Servis vozidel</title>
+
+<link
+  rel="manifest"
+  href="manifest.json">
+
+<link
+  rel="stylesheet"
+  href="styles.css">
+
+<meta
+  name="theme-color"
+  content="#6D28D9">
+
+</head>
+
+<body>
+
+<section id="loginPage" class="page active">
+
+    <div class="app-header">
+        <h1>Servis vozidel</h1>
+    </div>
+
+    <div class="card">
+
+        <label>Uživatel</label>
+
+        <input
+            id="email"
+            type="email"
+            value="zdrahall@servisvozidel.local">
+
+        <label>Heslo</label>
+
+        <input
+            id="password"
+            type="password">
+
+        <button id="loginBtn">
+            Přihlásit
+        </button>
+
+    </div>
+
+</section>
+
+<section id="dashboardPage" class="page">
+
+    <div class="app-header">
+        <h2>Dashboard</h2>
+    </div>
+
+    <div class="stats-grid">
+
+        <div class="card">
+            <h3 id="openCount">0</h3>
+            <p>Otevřené</p>
+        </div>
+
+        <div class="card">
+            <h3 id="waitingCount">0</h3>
+            <p>Čeká na díly</p>
+        </div>
+
+        <div class="card">
+            <h3 id="doneTodayCount">0</h3>
+            <p>Hotovo</p>
+        </div>
+
+    </div>
+
+</section>
+
+<section id="calendarPage" class="page">
+
+    <div class="app-header">
+        <h2>Kalendář</h2>
+    </div>
+
+    <div class="card">
+
+        <div class="calendar-header">
+
+            <button id="prevMonthBtn">
+                ◀
+            </button>
+
+            <h3 id="calendarMonth"></h3>
+
+            <button id="nextMonthBtn">
+                ▶
+            </button>
+
+        </div>
+
+        <div id="calendarGrid"></div>
+
+    </div>
+
+    <div class="card">
+
+        <h3>Opravy na vybraný den</h3>
+
+        <div id="selectedDayRepairs"></div>
+
+        <button id="calendarAddRepairBtn">
+            + Přidat opravu
+        </button>
+
+    </div>
+
+</section>
+
+<section id="repairsPage" class="page">
+
+    <div class="app-header">
+        <h2>Opravy</h2>
+    </div>
+
+    <div class="card">
+
+        <input
+            id="searchInput"
+            placeholder="SPZ, značka, majitel">
+
+    </div>
+
+    <div class="repair-tabs">
+
+        <button class="tab active">
+            Otevřené
+        </button>
+
+        <button class="tab">
+            Hotové
+        </button>
+
+        <button class="tab">
+            Archiv
+        </button>
+
+    </div>
+
+    <div id="repairList"></div>
+
+</section>
+
+<section id="repairFormPage" class="page">
+
+    <div class="app-header">
+        <h2>Nová oprava</h2>
+    </div>
+
+    <div class="card">
+
+        <label>Značka</label>
+        <input id="brand">
+
+        <label>SPZ</label>
+        <input id="spz">
+
+        <label>Majitel</label>
+        <input id="owner">
+
+        <label>Telefon</label>
+        <input id="phone">
+
+        <label>Datum</label>
+        <input
+            id="repairDate"
+            type="date">
+
+        <label>Závada</label>
+        <textarea id="problem"></textarea>
+
+        <label>Provedená oprava</label>
+        <textarea id="solution"></textarea>
+
+        <label>Priorita</label>
+
+        <select id="priority">
+
+            <option value="low">
+                Nízká
+            </option>
+
+            <option value="medium">
+                Střední
+            </option>
+
+            <option value="high">
+                Vysoká
+            </option>
+
+        </select>
+
+        <label>Stav</label>
+
+        <select id="status">
+
+            <option>
+                Otevřeno
+            </option>
+
+            <option>
+                Čeká na díly
+            </option>
+
+            <option>
+                Hotovo
+            </option>
+
+        </select>
+
+        <label>Poznámka</label>
+
+        <textarea id="note"></textarea>
+
+        <h3>Náklady</h3>
+
+        <div id="costsContainer"></div>
+
+        <button
+            id="addCostBtn"
+            type="button">
+
+            + Přidat položku
+
+        </button>
+
+        <h3>
+
+            Celkem:
+
+            <span id="totalCost">
+                0 Kč
+            </span>
+
+        </h3>
+
+        <button id="saveRepairBtn">
+            Uložit opravu
+        </button>
+
+    </div>
+
+</section>
+
+<section id="vehiclePage" class="page">
+
+    <div class="app-header">
+        <h2>Karta vozidla</h2>
+    </div>
+
+    <div class="card">
+
+        <h3 id="vehicleSpz"></h3>
+
+        <p id="vehicleBrand"></p>
+
+        <p id="vehicleOwner"></p>
+
+        <a id="vehiclePhone"></a>
+
+    </div>
+
+    <div class="card">
+
+        <h3>Historie oprav</h3>
+
+        <div id="vehicleHistory"></div>
+
+    </div>
+
+</section>
+
+<section id="settingsPage" class="page">
+
+    <div class="app-header">
+        <h2>Nastavení</h2>
+    </div>
+
+    <div class="card">
+
+        <label>
+
+            Tmavý režim
+
+            <input
+                id="darkMode"
+                type="checkbox">
+
+        </label>
+
+        <hr>
+
+        <button id="logoutBtn">
+            Odhlásit
+        </button>
+
+        <p id="appVersion"></p>
+
+    </div>
+
+</section>
+
+<nav id="bottomNav">
+
+    <button data-page="calendarPage">
+        📅
+    </button>
+
+    <button data-page="repairsPage">
+        📋
+    </button>
+
+    <button data-page="repairFormPage">
+        ➕
+    </button>
+
+    <button data-page="settingsPage">
+        ⚙️
+    </button>
+
+</nav>
+
+<script
+    type="module"
+    src="app.js">
+</script>
+
+</body>
+</html>
