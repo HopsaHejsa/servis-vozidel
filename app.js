@@ -2,7 +2,8 @@ import {
     login,
     logout,
     watchAuth,
-    createRepair
+    createRepair,
+    watchRepairs
 }
 from "./firebase.js";
 
@@ -11,16 +12,13 @@ import {
 }
 from "./config.js";
 
+let repairs = [];
+
 function $(id) {
 
     return document.getElementById(id);
 
 }
-
-
-// ======================================
-// PAGE SWITCH
-// ======================================
 
 function showPage(pageId) {
 
@@ -39,7 +37,7 @@ function showPage(pageId) {
             pageId
         );
 
-    if (page) {
+    if(page){
 
         page.classList.add(
             "active"
@@ -52,24 +50,16 @@ function showPage(pageId) {
 window.showPage = showPage;
 
 
-// ======================================
 // LOGIN
-// ======================================
 
 function initLogin() {
 
-    const button =
-        $("loginBtn");
-
-    if (!button) {
-        return;
-    }
-
-    button.addEventListener(
+    $("loginBtn")
+    ?.addEventListener(
         "click",
-        async () => {
+        async ()=>{
 
-            try {
+            try{
 
                 await login(
 
@@ -83,9 +73,7 @@ function initLogin() {
 
             catch(error){
 
-                console.error(
-                    error
-                );
+                console.error(error);
 
                 alert(
                     "Neplatné přihlášení."
@@ -99,9 +87,7 @@ function initLogin() {
 }
 
 
-// ======================================
 // LOGOUT
-// ======================================
 
 function initLogout(){
 
@@ -118,9 +104,7 @@ function initLogout(){
 }
 
 
-// ======================================
 // AUTH
-// ======================================
 
 function initAuth(){
 
@@ -131,6 +115,8 @@ function initAuth(){
             showPage(
                 "calendarPage"
             );
+
+            startRealtime();
 
         }
 
@@ -147,9 +133,7 @@ function initAuth(){
 }
 
 
-// ======================================
 // NAVIGATION
-// ======================================
 
 function initNavigation(){
 
@@ -166,13 +150,9 @@ function initNavigation(){
                 const target =
                 button.dataset.page;
 
-                if(target){
-
-                    showPage(
-                        target
-                    );
-
-                }
+                showPage(
+                    target
+                );
 
             }
         );
@@ -182,69 +162,20 @@ function initNavigation(){
 }
 
 
-// ======================================
-// DARK MODE
-// ======================================
+// CALENDAR
 
-function initDarkMode(){
+function initCalendar(){
 
-    const saved =
-    localStorage.getItem(
-        "darkMode"
-    );
+    const button =
+    $("calendarAddRepairBtn");
 
-    if(saved === "true"){
-
-        document.body
-        .classList.add(
-            "dark"
-        );
-
-    }
-
-    const darkMode =
-    $("darkMode");
-
-    if(!darkMode){
+    if(!button){
 
         return;
 
     }
 
-    darkMode.checked =
-    saved === "true";
-
-    darkMode.addEventListener(
-        "change",
-        event=>{
-
-            document.body
-            .classList.toggle(
-                "dark"
-            );
-
-            localStorage.setItem(
-
-                "darkMode",
-
-                event.target.checked
-
-            );
-
-        }
-    );
-
-}
-
-
-// ======================================
-// CALENDAR
-// ======================================
-
-function initCalendar(){
-
-    $("calendarAddRepairBtn")
-    ?.addEventListener(
+    button.addEventListener(
         "click",
         ()=>{
 
@@ -258,9 +189,7 @@ function initCalendar(){
 }
 
 
-// ======================================
 // COSTS
-// ======================================
 
 function initCosts(){
 
@@ -293,7 +222,7 @@ function initCosts(){
 `;
 
             $("costsContainer")
-            ?.appendChild(row);
+            .appendChild(row);
 
             row
             .querySelector(
@@ -336,9 +265,7 @@ function calculateTotal(){
 }
 
 
-// ======================================
-// SAVE REPAIR
-// ======================================
+// SAVE
 
 function initSaveRepair(){
 
@@ -393,13 +320,13 @@ function initSaveRepair(){
                     "Oprava uložena."
                 );
 
+                clearForm();
+
             }
 
             catch(error){
 
-                console.error(
-                    error
-                );
+                console.error(error);
 
                 alert(
                     "Chyba ukládání."
@@ -412,37 +339,120 @@ function initSaveRepair(){
 
 }
 
+function clearForm(){
 
-// ======================================
+    [
+        "brand",
+        "spz",
+        "owner",
+        "phone",
+        "repairDate",
+        "problem",
+        "solution",
+        "note"
+    ]
+    .forEach(id=>{
+
+        const el = $(id);
+
+        if(el){
+
+            el.value = "";
+
+        }
+
+    });
+
+}
+
+
+// REALTIME
+
+function startRealtime(){
+
+    watchRepairs(data=>{
+
+        repairs = data;
+
+        renderRepairs();
+
+    });
+
+}
+
+function renderRepairs(){
+
+    const container =
+    $("repairList");
+
+    if(!container){
+
+        return;
+
+    }
+
+    container.innerHTML = "";
+
+    repairs.forEach(repair=>{
+
+        const card =
+        document.createElement(
+            "div"
+        );
+
+        card.className =
+        "repair-card";
+
+        card.innerHTML = `
+
+<div class="repair-title">
+${repair.znacka || ""}
+</div>
+
+<div class="repair-spz">
+${repair.spz || ""}
+</div>
+
+<div>
+${repair.zavada || ""}
+</div>
+
+<div>
+${repair.stav || ""}
+</div>
+
+`;
+
+        container.appendChild(
+            card
+        );
+
+    });
+
+}
+
+
 // VERSION
-// ======================================
 
 function initVersion(){
 
     const version =
     $("appVersion");
 
-    if(!version){
+    if(version){
 
-        return;
+        version.textContent =
+            "Verze " +
+            APP_VERSION;
 
     }
-
-    version.textContent =
-
-    "Verze " +
-
-    APP_VERSION;
 
 }
 
 
-// ======================================
 // START
-// ======================================
 
-document
-.addEventListener(
+document.addEventListener(
     "DOMContentLoaded",
     ()=>{
 
@@ -451,8 +461,6 @@ document
         initLogout();
 
         initNavigation();
-
-        initDarkMode();
 
         initCalendar();
 
