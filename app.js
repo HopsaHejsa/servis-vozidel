@@ -1,12 +1,26 @@
 import {
     login,
     logout,
-    watchAuth
-} from "./firebase.js";
+    watchAuth,
+    createRepair
+}
+from "./firebase.js";
+
+import {
+    APP_VERSION
+}
+from "./config.js";
 
 function $(id) {
+
     return document.getElementById(id);
+
 }
+
+
+// ======================================
+// PAGE SWITCH
+// ======================================
 
 function showPage(pageId) {
 
@@ -14,45 +28,64 @@ function showPage(pageId) {
         .querySelectorAll(".page")
         .forEach(page => {
 
-            page.classList.remove("active");
+            page.classList.remove(
+                "active"
+            );
 
         });
 
-    const page = document.getElementById(pageId);
+    const page =
+        document.getElementById(
+            pageId
+        );
 
     if (page) {
-        page.classList.add("active");
+
+        page.classList.add(
+            "active"
+        );
+
     }
+
 }
+
+window.showPage = showPage;
+
+
+// ======================================
+// LOGIN
+// ======================================
 
 function initLogin() {
 
-    const loginBtn = $("loginBtn");
+    const button =
+        $("loginBtn");
 
-    if (!loginBtn) {
+    if (!button) {
         return;
     }
 
-    loginBtn.addEventListener(
+    button.addEventListener(
         "click",
         async () => {
-
-            const email =
-                $("email").value.trim();
-
-            const password =
-                $("password").value;
 
             try {
 
                 await login(
-                    email,
-                    password
+
+                    $("email").value,
+
+                    $("password").value
+
                 );
 
-            } catch (error) {
+            }
 
-                console.error(error);
+            catch(error){
+
+                console.error(
+                    error
+                );
 
                 alert(
                     "Neplatné přihlášení."
@@ -62,110 +95,46 @@ function initLogin() {
 
         }
     );
+
 }
 
-function initLogout() {
 
-    const logoutBtn =
-        $("logoutBtn");
+// ======================================
+// LOGOUT
+// ======================================
 
-    if (!logoutBtn) {
-        return;
-    }
+function initLogout(){
 
-    logoutBtn.addEventListener(
+    $("logoutBtn")
+    ?.addEventListener(
         "click",
-        async () => {
+        async ()=>{
 
             await logout();
 
         }
     );
-}
-
-function initNavigation() {
-
-    document
-        .querySelectorAll(
-            "#bottomNav button"
-        )
-        .forEach(button => {
-
-            button.addEventListener(
-                "click",
-                () => {
-
-                    const target =
-                        button.dataset.page;
-
-                    if (target) {
-
-                        showPage(
-                            target
-                        );
-
-                    }
-
-                }
-            );
-
-        });
 
 }
 
-function initDarkMode() {
 
-    const saved =
-        localStorage.getItem(
-            "darkMode"
-        );
+// ======================================
+// AUTH
+// ======================================
 
-    if (saved === "true") {
+function initAuth(){
 
-        document.body.classList.add(
-            "dark"
-        );
+    watchAuth(user=>{
 
-    }
+        if(user){
 
-    const darkMode =
-        $("darkMode");
-
-    if (!darkMode) {
-        return;
-    }
-
-    darkMode.checked =
-        saved === "true";
-
-    darkMode.addEventListener(
-        "change",
-        event => {
-
-            document.body.classList.toggle(
-                "dark"
-            );
-
-            localStorage.setItem(
-                "darkMode",
-                event.target.checked
+            showPage(
+                "calendarPage"
             );
 
         }
-    );
-}
 
-function initAuth() {
-
-    watchAuth(user => {
-
-        if (user) {
-
-            showPage(
-                "dashboardPage"
-            );
-
-        } else {
+        else{
 
             showPage(
                 "loginPage"
@@ -177,9 +146,305 @@ function initAuth() {
 
 }
 
-document.addEventListener(
+
+// ======================================
+// NAVIGATION
+// ======================================
+
+function initNavigation(){
+
+    document
+    .querySelectorAll(
+        "#bottomNav button"
+    )
+    .forEach(button=>{
+
+        button.addEventListener(
+            "click",
+            ()=>{
+
+                const target =
+                button.dataset.page;
+
+                if(target){
+
+                    showPage(
+                        target
+                    );
+
+                }
+
+            }
+        );
+
+    });
+
+}
+
+
+// ======================================
+// DARK MODE
+// ======================================
+
+function initDarkMode(){
+
+    const saved =
+    localStorage.getItem(
+        "darkMode"
+    );
+
+    if(saved === "true"){
+
+        document.body
+        .classList.add(
+            "dark"
+        );
+
+    }
+
+    const darkMode =
+    $("darkMode");
+
+    if(!darkMode){
+
+        return;
+
+    }
+
+    darkMode.checked =
+    saved === "true";
+
+    darkMode.addEventListener(
+        "change",
+        event=>{
+
+            document.body
+            .classList.toggle(
+                "dark"
+            );
+
+            localStorage.setItem(
+
+                "darkMode",
+
+                event.target.checked
+
+            );
+
+        }
+    );
+
+}
+
+
+// ======================================
+// CALENDAR
+// ======================================
+
+function initCalendar(){
+
+    $("calendarAddRepairBtn")
+    ?.addEventListener(
+        "click",
+        ()=>{
+
+            showPage(
+                "repairFormPage"
+            );
+
+        }
+    );
+
+}
+
+
+// ======================================
+// COSTS
+// ======================================
+
+function initCosts(){
+
+    $("addCostBtn")
+    ?.addEventListener(
+        "click",
+        ()=>{
+
+            const row =
+            document.createElement(
+                "div"
+            );
+
+            row.className =
+            "cost-row";
+
+            row.innerHTML = `
+
+<input
+ class="cost-name"
+ placeholder="Název položky"
+>
+
+<input
+ class="cost-price"
+ type="number"
+ placeholder="Cena"
+>
+
+`;
+
+            $("costsContainer")
+            ?.appendChild(row);
+
+            row
+            .querySelector(
+                ".cost-price"
+            )
+            .addEventListener(
+                "input",
+                calculateTotal
+            );
+
+        }
+    );
+
+}
+
+function calculateTotal(){
+
+    let total = 0;
+
+    document
+    .querySelectorAll(
+        ".cost-price"
+    )
+    .forEach(item=>{
+
+        total += Number(
+            item.value || 0
+        );
+
+    });
+
+    $("totalCost").textContent =
+
+        total.toLocaleString(
+            "cs-CZ"
+        )
+
+        + " Kč";
+
+}
+
+
+// ======================================
+// SAVE REPAIR
+// ======================================
+
+function initSaveRepair(){
+
+    $("saveRepairBtn")
+    ?.addEventListener(
+        "click",
+        async ()=>{
+
+            const repair = {
+
+                znacka:
+                $("brand").value,
+
+                spz:
+                $("spz").value,
+
+                majitel:
+                $("owner").value,
+
+                telefon:
+                $("phone").value,
+
+                datum:
+                $("repairDate").value,
+
+                zavada:
+                $("problem").value,
+
+                provedenaOprava:
+                $("solution").value,
+
+                priorita:
+                $("priority").value,
+
+                stav:
+                $("status").value,
+
+                poznamka:
+                $("note").value,
+
+                archiv:false
+
+            };
+
+            try{
+
+                await createRepair(
+                    repair
+                );
+
+                alert(
+                    "Oprava uložena."
+                );
+
+            }
+
+            catch(error){
+
+                console.error(
+                    error
+                );
+
+                alert(
+                    "Chyba ukládání."
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+// ======================================
+// VERSION
+// ======================================
+
+function initVersion(){
+
+    const version =
+    $("appVersion");
+
+    if(!version){
+
+        return;
+
+    }
+
+    version.textContent =
+
+    "Verze " +
+
+    APP_VERSION;
+
+}
+
+
+// ======================================
+// START
+// ======================================
+
+document
+.addEventListener(
     "DOMContentLoaded",
-    () => {
+    ()=>{
 
         initLogin();
 
@@ -188,6 +453,14 @@ document.addEventListener(
         initNavigation();
 
         initDarkMode();
+
+        initCalendar();
+
+        initCosts();
+
+        initSaveRepair();
+
+        initVersion();
 
         initAuth();
 
