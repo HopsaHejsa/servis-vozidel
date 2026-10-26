@@ -401,7 +401,7 @@ function renderRepairs(){
         );
 
         card.className =
-        "repair-card";
+        "repair-card card";
 
         card.innerHTML = `
 
