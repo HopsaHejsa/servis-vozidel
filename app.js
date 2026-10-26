@@ -1,3 +1,5 @@
+alert("APP START");
+
 import {
     login,
     logout,
