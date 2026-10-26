@@ -394,7 +394,42 @@ function renderRepairs(){
 
     container.innerHTML = "";
 
-    repairs.forEach(repair=>{
+    let filtered =
+        [...repairs];
+
+    if(currentFilter === "open"){
+
+        filtered =
+            filtered.filter(
+                item =>
+                    !item.archiv &&
+                    item.stav !== "Hotovo"
+            );
+
+    }
+
+    if(currentFilter === "done"){
+
+        filtered =
+            filtered.filter(
+                item =>
+                    !item.archiv &&
+                    item.stav === "Hotovo"
+            );
+
+    }
+
+    if(currentFilter === "archive"){
+
+        filtered =
+            filtered.filter(
+                item =>
+                    item.archiv === true
+            );
+
+    }
+
+    filtered.forEach(repair=>{
 
         const card =
         document.createElement(
@@ -407,19 +442,27 @@ function renderRepairs(){
         card.innerHTML = `
 
 <div class="repair-title">
+
 ${repair.znacka || ""}
+
 </div>
 
 <div class="repair-spz">
+
 ${repair.spz || ""}
+
 </div>
 
 <div>
+
 ${repair.zavada || ""}
+
 </div>
 
 <div>
+
 ${repair.stav || ""}
+
 </div>
 
 `;
