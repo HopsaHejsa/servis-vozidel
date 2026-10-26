@@ -206,3 +206,46 @@ body.dark select{
     color:white;
 
 }
+
+/* KARTA OPRAVY */
+
+.repair-card{
+
+    background:white;
+
+    margin:15px;
+
+    padding:16px;
+
+    border-radius:16px;
+
+    box-shadow:
+        0 4px 12px rgba(0,0,0,.08);
+
+}
+
+.repair-title{
+
+    font-size:18px;
+
+    font-weight:700;
+
+    margin-bottom:6px;
+
+}
+
+.repair-spz{
+
+    color:#4f46e5;
+
+    font-weight:600;
+
+    margin-bottom:6px;
+
+}
+
+body.dark .repair-card{
+
+    background:#1f2937;
+
+}
