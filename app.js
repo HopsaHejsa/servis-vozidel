@@ -13,6 +13,7 @@ import {
 from "./config.js";
 
 let repairs = [];
+let currentFilter = "open";
 
 function $(id) {
 
