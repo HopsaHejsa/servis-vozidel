@@ -51,6 +51,13 @@ export const auth =
 export const db =
     getFirestore(app);
 
+const COLLECTION =
+    "repairs";
+
+// ======================================
+// AUTH
+// ======================================
+
 export async function login(
     email,
     password
@@ -81,17 +88,13 @@ export function watchAuth(
 
 }
 
-const COLLECTION =
-    "repairs";
+// ======================================
+// CREATE
+// ======================================
 
 export async function createRepair(
     repair
 ){
-
-    console.log(
-        "UKLADAM OPRAVU",
-        repair
-    );
 
     return await addDoc(
 
@@ -105,6 +108,175 @@ export async function createRepair(
     );
 
 }
+
+// ======================================
+// READ ONE
+// ======================================
+
+export async function getRepair(
+    id
+){
+
+    const snapshot =
+        await getDoc(
+
+            doc(
+                db,
+                COLLECTION,
+                id
+            )
+
+        );
+
+    if(!snapshot.exists()){
+
+        return null;
+
+    }
+
+    return {
+
+        id:snapshot.id,
+
+        ...snapshot.data()
+
+    };
+
+}
+
+// ======================================
+// UPDATE
+// ======================================
+
+export async function updateRepair(
+    id,
+    repair
+){
+
+    await updateDoc(
+
+        doc(
+            db,
+            COLLECTION,
+            id
+        ),
+
+        repair
+
+    );
+
+}
+
+// ======================================
+// DONE
+// ======================================
+
+export async function markRepairDone(
+    id
+){
+
+    await updateDoc(
+
+        doc(
+            db,
+            COLLECTION,
+            id
+        ),
+
+        {
+            stav:"Hotovo"
+        }
+
+    );
+
+}
+
+// ======================================
+// ARCHIVE
+// ======================================
+
+export async function archiveRepair(
+    id
+){
+
+    await updateDoc(
+
+        doc(
+            db,
+            COLLECTION,
+            id
+        ),
+
+        {
+            archiv:true
+        }
+
+    );
+
+}
+
+// ======================================
+// DELETE
+// ======================================
+
+export async function deleteRepair(
+    id
+){
+
+    await deleteDoc(
+
+        doc(
+            db,
+            COLLECTION,
+            id
+        )
+
+    );
+
+}
+
+// ======================================
+// HISTORY BY SPZ
+// ======================================
+
+export async function getVehicleHistory(
+    spz
+){
+
+    const q =
+        query(
+
+            collection(
+                db,
+                COLLECTION
+            ),
+
+            where(
+                "spz",
+                "==",
+                spz
+            )
+
+        );
+
+    const snapshot =
+        await getDocs(q);
+
+    return snapshot.docs.map(
+        item => ({
+
+            id:item.id,
+
+            ...item.data()
+
+        })
+    );
+
+}
+
+// ======================================
+// REALTIME
+// ======================================
 
 export function watchRepairs(
     callback
