@@ -524,6 +524,70 @@ ${repair.stav || ""}
     });
 
 }
+function initEditRepair(){
+
+    $("editRepairBtn")
+    ?.addEventListener(
+        "click",
+        async ()=>{
+
+            if(!selectedRepairId){
+
+                return;
+
+            }
+
+            const repair =
+                await getRepair(
+                    selectedRepairId
+                );
+
+            if(!repair){
+
+                return;
+
+            }
+
+            editMode = true;
+
+            $("brand").value =
+                repair.znacka || "";
+
+            $("spz").value =
+                repair.spz || "";
+
+            $("owner").value =
+                repair.majitel || "";
+
+            $("phone").value =
+                repair.telefon || "";
+
+            $("repairDate").value =
+                repair.datum || "";
+
+            $("problem").value =
+                repair.zavada || "";
+
+            $("solution").value =
+                repair.provedenaOprava || "";
+
+            $("priority").value =
+                repair.priorita || "medium";
+
+            $("status").value =
+                repair.stav || "Otevřeno";
+
+            $("note").value =
+                repair.poznamka || "";
+
+            showPage(
+                "repairFormPage"
+            );
+
+        }
+    );
+
+}
 
 async function openRepairDetail(id){
 
