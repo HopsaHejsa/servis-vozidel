@@ -5,6 +5,7 @@ import {
     createRepair,
     watchRepairs,
     getRepair
+    updateRepair
 }
 from "./firebase.js";
 
@@ -16,6 +17,7 @@ from "./config.js";
 let repairs = [];
 let currentFilter = "open";
 let selectedRepairId = null;
+let editMode = false;
 
 function $(id) {
 
