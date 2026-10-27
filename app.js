@@ -1,9 +1,10 @@
-import {
+iimport {
     login,
     logout,
     watchAuth,
     createRepair,
-    watchRepairs
+    watchRepairs,
+    getRepair
 }
 from "./firebase.js";
 
@@ -14,6 +15,7 @@ from "./config.js";
 
 let repairs = [];
 let currentFilter = "open";
+let selectedRepairId = null;
 
 function $(id) {
 
