@@ -570,6 +570,51 @@ async function openRepairDetail(id){
     );
 
 }
+async function openRepairDetail(id){
+
+    selectedRepairId = id;
+
+    const repair =
+        await getRepair(id);
+
+    if(!repair){
+
+        return;
+
+    }
+
+    $("detailBrand").textContent =
+        repair.znacka || "";
+
+    $("detailSpz").textContent =
+        repair.spz || "";
+
+    $("detailOwner").textContent =
+        repair.majitel || "";
+
+    $("detailPhone").textContent =
+        repair.telefon || "";
+
+    $("detailDate").textContent =
+        repair.datum || "";
+
+    $("detailStatus").textContent =
+        repair.stav || "";
+
+    $("detailProblem").textContent =
+        repair.zavada || "";
+
+    $("detailSolution").textContent =
+        repair.provedenaOprava || "";
+
+    $("detailNote").textContent =
+        repair.poznamka || "";
+
+    showPage(
+        "repairDetailPage"
+    );
+
+}
 
 // VERSION
 
