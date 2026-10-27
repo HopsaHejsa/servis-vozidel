@@ -5,7 +5,7 @@ import {
     createRepair,
     watchRepairs,
     getRepair,
-    updateRepair
+    updateRepair,
 }
 from "./firebase.js";
 
