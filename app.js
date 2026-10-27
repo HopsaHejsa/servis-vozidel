@@ -485,6 +485,16 @@ function renderRepairs(){
         card.className =
         "repair-card card";
 
+        card.addEventListener(
+    "click",
+    ()=>{
+
+        openRepairDetail(
+            repair.id
+        );
+
+    }
+);
         card.innerHTML = `
 
 <div class="repair-title">
