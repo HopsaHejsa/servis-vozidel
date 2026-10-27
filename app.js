@@ -609,6 +609,17 @@ document.addEventListener(
 
         initVersion();
 
+        $("backToRepairsBtn")
+?.addEventListener(
+    "click",
+    ()=>{
+
+        showPage(
+            "repairsPage"
+        );
+
+    }
+);
         initAuth();
 
     }
