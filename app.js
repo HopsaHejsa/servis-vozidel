@@ -357,9 +357,28 @@ function initSaveRepair(){
 
             try{
 
-                await createRepair(
-                    repair
-                );
+                if(editMode){
+
+    await updateRepair(
+
+        selectedRepairId,
+
+        repair
+
+    );
+
+    editMode = false;
+
+    selectedRepairId = null;
+
+}
+else{
+
+    await createRepair(
+        repair
+    );
+
+}
 
                 alert(
                     "Oprava uložena."
