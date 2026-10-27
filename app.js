@@ -737,6 +737,8 @@ document.addEventListener(
 
         initSaveRepair();
 
+        initEditRepair();
+        
         initVersion();
 
         $("backToRepairsBtn")
