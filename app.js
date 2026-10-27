@@ -4,7 +4,7 @@ import {
     watchAuth,
     createRepair,
     watchRepairs,
-    getRepair
+    getRepair,
     updateRepair
 }
 from "./firebase.js";
