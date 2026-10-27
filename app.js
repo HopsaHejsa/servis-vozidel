@@ -1,4 +1,4 @@
-iimport {
+import {
     login,
     logout,
     watchAuth,
