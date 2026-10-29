@@ -322,6 +322,32 @@ function initSaveRepair(){
         "click",
         async ()=>{
 
+            const costs = [];
+
+document
+.querySelectorAll(".cost-row")
+.forEach(row=>{
+
+    costs.push({
+
+        name:
+            row.querySelector(
+                ".cost-name"
+            )?.value || "",
+
+        price:
+            Number(
+
+                row.querySelector(
+                    ".cost-price"
+                )?.value || 0
+
+            )
+
+    });
+
+});
+            
             const repair = {
 
                 znacka:
@@ -352,9 +378,21 @@ function initSaveRepair(){
                 $("status").value,
 
                 poznamka:
-                $("note").value,
+$("note").value,
 
-                archiv:false
+costs:costs,
+
+totalCost:
+
+    costs.reduce(
+        (sum,item)=>
+
+            sum + item.price,
+
+        0
+    ),
+
+archiv:false
 
             };
 
