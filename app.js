@@ -679,28 +679,8 @@ async function openRepairDetail(id){
     $("detailBrand").textContent =
         repair.znacka || "";
 
-   $("detailSpz").innerHTML = `
-#
-
-${repair.spz || ""}
-
-</a>
-`;
-
-$("detailSpz")
-.querySelector("a")
-.addEventListener(
-    "click",
-    event=>{
-
-        event.preventDefault();
-
-        openVehicleHistory(
-            repair.spz
-        );
-
-    }
-);
+    $("detailSpz").textContent =
+    repair.spz || "";
 
     $("detailOwner").textContent =
         repair.majitel || "";
