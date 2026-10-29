@@ -743,6 +743,8 @@ document.addEventListener(
         initSaveRepair();
 
         initEditRepair();
+
+initDetailActions();
         
         initVersion();
 
