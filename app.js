@@ -741,6 +741,51 @@ async function openRepairDetail(id){
     $("detailNote").textContent =
         repair.poznamka || "";
 
+$("detailCosts").innerHTML = "";
+
+(repair.costs || [])
+.forEach(item=>{
+
+    const row =
+    document.createElement(
+        "div"
+    );
+
+    row.className =
+        "cost-row";
+
+    row.innerHTML = `
+
+<div>
+
+${item.name || "-"}
+
+</div>
+
+<div>
+
+${item.price || 0} Kč
+
+</div>
+
+`;
+
+    $("detailCosts")
+    .appendChild(
+        row
+    );
+
+});
+
+$("detailTotalCost").textContent =
+
+    (repair.totalCost || 0)
+    .toLocaleString(
+        "cs-CZ"
+    )
+
+    + " Kč";
+    
     showPage(
         "repairDetailPage"
     );
