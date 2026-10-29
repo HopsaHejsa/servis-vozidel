@@ -665,6 +665,8 @@ function initDetailActions(){
 
 async function openRepairDetail(id){
 
+alert("detail start");
+    
     selectedRepairId = id;
 
     const repair =
