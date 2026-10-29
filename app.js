@@ -449,7 +449,6 @@ function startRealtime(){
 
 function renderRepairs(){
 
-alert("renderRepairs");
     
     const container =
     $("repairList");
