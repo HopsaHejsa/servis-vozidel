@@ -861,34 +861,25 @@ history.sort(
 
 <strong>
 ${item.datum || ""}
+
 </strong>
 
 </div>
 
 <div>
 
-${item.zavada || "-"}
+${item.provedenaOprava || item.zavada || "-"}
 
 </div>
 
 <div>
 
-Stav:
-${item.stav || "-"}
+Celkem:
 
-</div>
-
-<div>
-
-SPZ:
-${item.spz || "-"}
-
-</div>
-
-<div>
-
-Majitel:
-${item.majitel || "-"}
+${(item.totalCost || 0)
+    .toLocaleString(
+        "cs-CZ"
+    )} Kč
 
 </div>
 
