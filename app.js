@@ -513,6 +513,8 @@ function renderRepairs(){
     "click",
     ()=>{
 
+         alert("Klik na opravu");
+        
         openRepairDetail(
             repair.id
         );
