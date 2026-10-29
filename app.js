@@ -906,6 +906,18 @@ document.addEventListener(
 
     }
 );
+$("backToDetailBtn")
+?.addEventListener(
+    "click",
+    ()=>{
+
+        showPage(
+            "repairDetailPage"
+        );
+
+    }
+);
+        
         initAuth();
 
     }
