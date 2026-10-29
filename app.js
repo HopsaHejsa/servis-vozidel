@@ -675,8 +675,28 @@ async function openRepairDetail(id){
     $("detailBrand").textContent =
         repair.znacka || "";
 
-    $("detailSpz").textContent =
-        repair.spz || "";
+   $("detailSpz").innerHTML = `
+#
+
+${repair.spz || ""}
+
+</a>
+`;
+
+$("detailSpz")
+.querySelector("a")
+.addEventListener(
+    "click",
+    event=>{
+
+        event.preventDefault();
+
+        openVehicleHistory(
+            repair.spz
+        );
+
+    }
+);
 
     $("detailOwner").textContent =
         repair.majitel || "";
@@ -701,6 +721,58 @@ async function openRepairDetail(id){
 
     showPage(
         "repairDetailPage"
+    );
+
+}
+
+async function openVehicleHistory(spz){
+
+    const history =
+        await getVehicleHistory(
+            spz
+        );
+
+    $("vehicleSpz").textContent =
+        spz;
+
+    $("vehicleHistory").innerHTML =
+        "";
+
+    history.forEach(item=>{
+
+        const row =
+        document.createElement(
+            "div"
+        );
+
+        row.className =
+        "card";
+
+        row.innerHTML = `
+
+<div>
+${item.datum || ""}
+</div>
+
+<div>
+${item.zavada || ""}
+</div>
+
+<div>
+${item.stav || ""}
+</div>
+
+`;
+
+        $("vehicleHistory")
+        .appendChild(
+            row
+        );
+
+    });
+
+    showPage(
+        "vehiclePage"
     );
 
 }
