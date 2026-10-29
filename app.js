@@ -355,6 +355,27 @@ for(
 const dateString =
     `${year}-${String(month+1).padStart(2,"0")}-${String(day).padStart(2,"0")}`;
 
+const today =
+    new Date();
+
+const todayString =
+    `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,"0")}-${String(today.getDate()).padStart(2,"0")}`;
+
+if(dateString === todayString){
+
+    cell.classList.add(
+        "selected-day"
+    );
+
+    selectedDate =
+        todayString;
+
+    renderSelectedDayRepairs(
+        todayString
+    );
+
+}
+        
 const hasRepair =
     repairs.some(
         repair =>
