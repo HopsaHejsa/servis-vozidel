@@ -8,6 +8,7 @@ import {
     updateRepair,
     markRepairDone,
     archiveRepair,
+    getVehicleHistory,
 }
 from "./firebase.js";
 
