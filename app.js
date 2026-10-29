@@ -21,6 +21,9 @@ let repairs = [];
 let currentFilter = "open";
 let selectedRepairId = null;
 let editMode = false;
+let currentDate = new Date();
+
+let selectedDate = null;
 
 function $(id) {
 
@@ -217,22 +220,217 @@ function initCalendar(){
     const button =
     $("calendarAddRepairBtn");
 
-    if(!button){
+    if(button){
+
+        button.addEventListener(
+            "click",
+            ()=>{
+
+                if(selectedDate){
+
+                    $("repairDate").value =
+                        selectedDate;
+
+                }
+
+                showPage(
+                    "repairFormPage"
+                );
+
+            }
+        );
+
+    }
+
+    function renderCalendar(){
+
+    const grid =
+        $("calendarGrid");
+
+    if(!grid){
 
         return;
 
     }
 
-    button.addEventListener(
+    grid.innerHTML = "";
+
+    const year =
+        currentDate.getFullYear();
+
+    const month =
+        currentDate.getMonth();
+
+    const firstDay =
+        new Date(
+            year,
+            month,
+            1
+        );
+
+    const lastDay =
+        new Date(
+            year,
+            month + 1,
+            0
+        );
+
+    $("calendarMonth").textContent =
+
+        currentDate.toLocaleDateString(
+            "cs-CZ",
+            {
+                month:"long",
+                year:"numeric"
+            }
+        );
+
+    for(
+        let day = 1;
+        day <= lastDay.getDate();
+        day++
+    ){
+
+        const cell =
+        document.createElement(
+            "button"
+        );
+
+        cell.className =
+            "calendar-day";
+
+        cell.textContent =
+            day;
+
+        cell.addEventListener(
+            "click",
+            ()=>{
+
+                const dateString =
+                    `${year}-${String(month+1).padStart(2,"0")}-${String(day).padStart(2,"0")}`;
+
+                selectedDate =
+                    dateString;
+
+                renderSelectedDayRepairs(
+                    dateString
+                );
+
+            }
+        );
+
+        grid.appendChild(
+            cell
+        );
+
+    }
+
+}
+
+    function renderSelectedDayRepairs(
+    date
+){
+
+    const container =
+        $("selectedDayRepairs");
+
+    if(!container){
+
+        return;
+
+    }
+
+    container.innerHTML = "";
+
+    const dayRepairs =
+        repairs.filter(
+            repair =>
+
+                repair.datum === date
+        );
+
+    if(
+        dayRepairs.length === 0
+    ){
+
+        container.innerHTML =
+            "<p>Žádné opravy.</p>";
+
+        return;
+
+    }
+
+    dayRepairs.forEach(repair=>{
+
+        const card =
+        document.createElement(
+            "div"
+        );
+
+        card.className =
+            "repair-card card";
+
+        card.innerHTML = `
+
+<div>
+
+<strong>
+${repair.znacka || ""}
+</strong>
+
+</div>
+
+<div>
+
+${repair.spz || ""}
+
+</div>
+
+<div>
+
+${repair.stav || ""}
+
+</div>
+
+`;
+
+        container.appendChild(
+            card
+        );
+
+    });
+
+}
+
+    $("prevMonthBtn")
+    ?.addEventListener(
         "click",
         ()=>{
 
-            showPage(
-                "repairFormPage"
+            currentDate.setMonth(
+                currentDate.getMonth() - 1
             );
+
+            renderCalendar();
 
         }
     );
+
+    $("nextMonthBtn")
+    ?.addEventListener(
+        "click",
+        ()=>{
+
+            currentDate.setMonth(
+                currentDate.getMonth() + 1
+            );
+
+            renderCalendar();
+
+        }
+    );
+
+    renderCalendar();
 
 }
 
