@@ -249,3 +249,34 @@ body.dark .repair-card{
     background:#1f2937;
 
 }
+
+#calendarGrid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(7,1fr);
+
+    gap:6px;
+
+}
+
+.calendar-day{
+
+    padding:12px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#f3f4f6;
+
+    cursor:pointer;
+
+}
+
+.calendar-day:hover{
+
+    background:#ddd6fe;
+
+}
