@@ -477,6 +477,22 @@ ${repair.stav || ""}
             card
         );
 
+document
+.querySelectorAll(
+    ".calendar-day"
+)
+.forEach(day=>{
+
+    day.classList.remove(
+        "selected-day"
+    );
+
+});
+
+cell.classList.add(
+    "selected-day"
+);
+        
     });
 
 }
