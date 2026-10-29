@@ -328,10 +328,6 @@ for(
             0
         );
 
-        console.log(
-    "Last day:",
-    lastDay.getDate()
-);
 
     $("calendarMonth").textContent =
 
