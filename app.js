@@ -775,17 +775,38 @@ history.sort(
                 card.innerHTML = `
 
 <div>
+
 <strong>
 ${item.datum || ""}
 </strong>
+
 </div>
 
 <div>
-${item.zavada || ""}
+
+${item.zavada || "-"}
+
 </div>
 
 <div>
-${item.stav || ""}
+
+Stav:
+${item.stav || "-"}
+
+</div>
+
+<div>
+
+SPZ:
+${item.spz || "-"}
+
+</div>
+
+<div>
+
+Majitel:
+${item.majitel || "-"}
+
 </div>
 
 `;
