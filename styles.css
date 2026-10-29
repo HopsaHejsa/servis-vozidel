@@ -280,3 +280,35 @@ body.dark .repair-card{
     background:#ddd6fe;
 
 }
+
+.calendar-header-day{
+
+    text-align:center;
+
+    font-weight:700;
+
+    padding:8px;
+
+}
+
+.calendar-day{
+
+    min-height:45px;
+
+    font-weight:600;
+
+}
+
+.calendar-day.has-repair{
+
+    background:#7c3aed;
+
+    color:white;
+
+}
+
+.calendar-day.has-repair:hover{
+
+    background:#6d28d9;
+
+}
