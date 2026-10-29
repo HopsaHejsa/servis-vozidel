@@ -709,6 +709,94 @@ async function openRepairDetail(id){
 
 }
 
+function initVehicleHistory(){
+
+    $("vehicleHistoryBtn")
+    ?.addEventListener(
+        "click",
+        async ()=>{
+
+            if(!selectedRepairId){
+
+                return;
+
+            }
+
+            const repair =
+                await getRepair(
+                    selectedRepairId
+                );
+
+            if(!repair){
+
+                return;
+
+            }
+
+            const history =
+                await getVehicleHistory(
+                    repair.spz
+                );
+
+            $("vehicleSpz").textContent =
+                repair.spz || "";
+
+            $("vehicleBrand").textContent =
+                repair.znacka || "";
+
+            $("vehicleOwner").textContent =
+                repair.majitel || "";
+
+            $("vehiclePhone").textContent =
+                repair.telefon || "";
+
+            $("vehicleHistory").innerHTML =
+                "";
+
+            history.forEach(item=>{
+
+                const card =
+                document.createElement(
+                    "div"
+                );
+
+                card.className =
+                "repair-card card";
+
+                card.innerHTML = `
+
+<div>
+<strong>
+${item.datum || ""}
+</strong>
+</div>
+
+<div>
+${item.zavada || ""}
+</div>
+
+<div>
+${item.stav || ""}
+</div>
+
+`;
+
+                $("vehicleHistory")
+                .appendChild(
+                    card
+                );
+
+            });
+
+            showPage(
+                "vehiclePage"
+            );
+
+        }
+    );
+
+}
+
 async function openVehicleHistory(spz){
 
     const history =
@@ -802,6 +890,8 @@ document.addEventListener(
         initEditRepair();
 
 initDetailActions();
+
+initVehicleHistory();
         
         initVersion();
 
