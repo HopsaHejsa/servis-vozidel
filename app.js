@@ -402,7 +402,21 @@ if(hasRepair){
         cell.addEventListener(
             "click",
             ()=>{
+document
+.querySelectorAll(
+    ".calendar-day"
+)
+.forEach(day=>{
 
+    day.classList.remove(
+        "selected-day"
+    );
+
+});
+
+cell.classList.add(
+    "selected-day"
+);
                 selectedDate =
                     dateString;
 
@@ -502,22 +516,6 @@ ${repair.stav || ""}
         container.appendChild(
             card
         );
-
-document
-.querySelectorAll(
-    ".calendar-day"
-)
-.forEach(day=>{
-
-    day.classList.remove(
-        "selected-day"
-    );
-
-});
-
-cell.classList.add(
-    "selected-day"
-);
         
     });
 
