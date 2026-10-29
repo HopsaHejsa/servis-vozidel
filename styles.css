@@ -312,3 +312,14 @@ body.dark .repair-card{
     background:#6d28d9;
 
 }
+.calendar-header{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    margin-bottom:16px;
+
+}
