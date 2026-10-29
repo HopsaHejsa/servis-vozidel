@@ -6,6 +6,8 @@ import {
     watchRepairs,
     getRepair,
     updateRepair,
+    markRepairDone,
+    archiveRepair,
 }
 from "./firebase.js";
 
@@ -601,6 +603,54 @@ function initEditRepair(){
 
             showPage(
                 "repairFormPage"
+            );
+
+        }
+    );
+
+}
+
+function initDetailActions(){
+
+    $("markDoneBtn")
+    ?.addEventListener(
+        "click",
+        async ()=>{
+
+            if(!selectedRepairId){
+
+                return;
+
+            }
+
+            await markRepairDone(
+                selectedRepairId
+            );
+
+            showPage(
+                "repairsPage"
+            );
+
+        }
+    );
+
+    $("archiveRepairBtn")
+    ?.addEventListener(
+        "click",
+        async ()=>{
+
+            if(!selectedRepairId){
+
+                return;
+
+            }
+
+            await archiveRepair(
+                selectedRepairId
+            );
+
+            showPage(
+                "repairsPage"
             );
 
         }
