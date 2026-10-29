@@ -737,7 +737,16 @@ alert("Historie klik");
                 await getVehicleHistory(
                     repair.spz
                 );
+history.sort(
+    (a,b)=>
 
+        (b.datum || "")
+        .localeCompare(
+            a.datum || ""
+        )
+
+);
+            
             $("vehicleSpz").textContent =
                 repair.spz || "";
 
