@@ -715,7 +715,7 @@ function initVehicleHistory(){
     ?.addEventListener(
         "click",
         async ()=>{
-alert("Historie klik");
+
             if(!selectedRepairId){
 
                 return;
