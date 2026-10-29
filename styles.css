@@ -301,9 +301,11 @@ body.dark .repair-card{
 
 .calendar-day.has-repair{
 
-    background:#7c3aed;
+    background:#7c3aed !important;
 
-    color:white;
+    color:white !important;
+
+    font-weight:700;
 
 }
 
