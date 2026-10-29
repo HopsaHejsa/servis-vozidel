@@ -255,6 +255,34 @@ function initCalendar(){
 
     grid.innerHTML = "";
 
+[
+    "Po",
+    "Út",
+    "St",
+    "Čt",
+    "Pá",
+    "So",
+    "Ne"
+]
+.forEach(day=>{
+
+    const header =
+    document.createElement(
+        "div"
+    );
+
+    header.className =
+        "calendar-header-day";
+
+    header.textContent =
+        day;
+
+    grid.appendChild(
+        header
+    );
+
+});
+        
     const year =
         currentDate.getFullYear();
 
@@ -267,6 +295,31 @@ function initCalendar(){
             month,
             1
         );
+
+        let startDay =
+    firstDay.getDay();
+
+startDay =
+    startDay === 0
+    ? 6
+    : startDay - 1;
+
+for(
+    let i = 0;
+    i < startDay;
+    i++
+){
+
+    const empty =
+    document.createElement(
+        "div"
+    );
+
+    grid.appendChild(
+        empty
+    );
+
+}
 
     const lastDay =
         new Date(
