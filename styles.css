@@ -263,15 +263,27 @@ body.dark .repair-card{
 
 .calendar-day{
 
-    padding:12px;
+    min-height:45px;
+
+    font-weight:600;
 
     border:none;
 
-    border-radius:10px;
+    border-radius:12px;
 
     background:#f3f4f6;
 
     cursor:pointer;
+
+}
+
+.calendar-day.has-repair{
+
+    background:#7c3aed !important;
+
+    color:white !important;
+
+    font-weight:700;
 
 }
 
