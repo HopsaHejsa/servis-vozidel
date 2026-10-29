@@ -1048,8 +1048,15 @@ async function openRepairDetail(id){
     $("detailOwner").textContent =
         repair.majitel || "";
 
-    $("detailPhone").textContent =
-        repair.telefon || "";
+    $("detailPhone").innerHTML = `
+
+<a href="tel:${repair.telefon || ""}">
+
+${repair.telefon || ""}
+
+</a>
+
+`;
 
     $("detailDate").textContent =
         repair.datum || "";
