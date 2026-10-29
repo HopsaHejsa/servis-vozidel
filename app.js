@@ -352,15 +352,30 @@ for(
         cell.className =
             "calendar-day";
 
+const dateString =
+    `${year}-${String(month+1).padStart(2,"0")}-${String(day).padStart(2,"0")}`;
+
+const hasRepair =
+    repairs.some(
+        repair =>
+            repair.datum ===
+            dateString
+    );
+
+if(hasRepair){
+
+    cell.classList.add(
+        "has-repair"
+    );
+
+}
+        
         cell.textContent =
             day;
 
         cell.addEventListener(
             "click",
             ()=>{
-
-                const dateString =
-                    `${year}-${String(month+1).padStart(2,"0")}-${String(day).padStart(2,"0")}`;
 
                 selectedDate =
                     dateString;
