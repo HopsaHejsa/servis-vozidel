@@ -349,3 +349,8 @@ body.dark .repair-card{
     margin:0;
 
 }
+.calendar-day.selected-day{
+
+    border:3px solid #7c3aed;
+
+}
