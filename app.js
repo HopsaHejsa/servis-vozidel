@@ -515,7 +515,7 @@ alert("renderRepairs");
     "click",
     ()=>{
 
-         alert("Klik na opravu");
+         
         
         openRepairDetail(
             repair.id
@@ -665,7 +665,6 @@ function initDetailActions(){
 
 async function openRepairDetail(id){
 
-alert("detail start");
     
     selectedRepairId = id;
 
