@@ -356,3 +356,15 @@ body.dark .repair-card{
     border:3px solid #7c3aed;
 
 }
+#calendarGrid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(7,1fr);
+
+    gap:6px;
+
+    overflow:visible;
+
+}
