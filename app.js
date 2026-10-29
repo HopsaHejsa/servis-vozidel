@@ -523,9 +523,15 @@ cell.classList.add(
         "click",
         ()=>{
 
-            currentDate.setMonth(
-                currentDate.getMonth() - 1
-            );
+            const currentMonth =
+    currentDate.getMonth();
+
+currentDate =
+    new Date(
+        currentDate.getFullYear(),
+        currentMonth - 1,
+        1
+    );
 
             renderCalendar();
 
@@ -537,9 +543,15 @@ cell.classList.add(
         "click",
         ()=>{
 
-            currentDate.setMonth(
-                currentDate.getMonth() + 1
-            );
+           const currentMonth =
+    currentDate.getMonth();
+
+currentDate =
+    new Date(
+        currentDate.getFullYear(),
+        currentMonth + 1,
+        1
+    );
 
             renderCalendar();
 
