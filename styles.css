@@ -368,3 +368,25 @@ body.dark .repair-card{
     overflow:visible;
 
 }
+
+.detail-actions{
+
+    display:grid;
+
+    gap:10px;
+
+}
+
+.detail-actions .row{
+
+    display:flex;
+
+    gap:10px;
+
+}
+
+.detail-actions button{
+
+    flex:1;
+
+}
