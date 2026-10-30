@@ -412,3 +412,63 @@ body.dark .repair-card{
     border-radius:8px;
 
 }
+
+body.dark{
+
+    background:#111827;
+
+    color:white;
+
+}
+
+body.dark .card{
+
+    background:#1f2937;
+
+}
+
+body.dark input,
+body.dark textarea,
+body.dark select{
+
+    background:#374151;
+
+    color:white;
+
+    border-color:#4b5563;
+
+}
+
+body.dark .repair-card{
+
+    background:#1f2937;
+
+}
+
+body.dark .calendar-day{
+
+    background:#374151;
+
+    color:white;
+
+}
+
+body.dark .calendar-day.has-repair{
+
+    background:#7c3aed;
+
+}
+
+body.dark #bottomNav{
+
+    background:#1f2937;
+
+}
+
+body.dark .tab{
+
+    background:#374151;
+
+    color:white;
+
+}
