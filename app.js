@@ -1484,6 +1484,8 @@ document.addEventListener(
 
         initFilters();
 
+initSearch();
+        
         initCalendar();
 
 initSpzAutocomplete();
