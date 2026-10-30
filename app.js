@@ -950,13 +950,13 @@ console.log(
                 repair.stav === "Hotovo"
         ).length;
 
-    $("openCount").textContent =
+    $("calendaropenCount").textContent =
         openCount;
 
-    $("waitingCount").textContent =
+    $("calendarwaitingCount").textContent =
         waitingCount;
 
-    $("doneTodayCount").textContent =
+    $("calendardoneCount").textContent =
         doneCount;
 
 }
