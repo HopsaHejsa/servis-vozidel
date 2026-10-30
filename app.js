@@ -213,6 +213,24 @@ function initFilters(){
 
 }
 
+function initSearch(){
+
+    $("searchInput")
+    ?.addEventListener(
+        "input",
+        event=>{
+
+            searchText =
+                event.target.value
+                .toLowerCase();
+
+            renderRepairs();
+
+        }
+    );
+
+}
+
 
 // CALENDAR
 
