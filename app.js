@@ -223,7 +223,10 @@ function initSearch(){
             searchText =
                 event.target.value
                 .toLowerCase();
-
+console.log(
+                "Search:",
+                searchText
+            );
             renderRepairs();
 
         }
