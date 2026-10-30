@@ -937,6 +937,31 @@ function renderRepairs(){
 
     }
 
+if(searchText){
+
+    visibleRepairs =
+        visibleRepairs.filter(
+            repair =>
+
+                (repair.spz || "")
+                .toLowerCase()
+                .includes(searchText)
+
+                ||
+
+                (repair.znacka || "")
+                .toLowerCase()
+                .includes(searchText)
+
+                ||
+
+                (repair.majitel || "")
+                .toLowerCase()
+                .includes(searchText)
+        );
+
+}
+    
     visibleRepairs.forEach(repair=>{
 
         const card =
