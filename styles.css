@@ -390,3 +390,25 @@ body.dark .repair-card{
     flex:1;
 
 }
+
+#repairDetailPage h4{
+
+    margin-top:20px;
+
+    margin-bottom:8px;
+
+}
+
+#detailProblem,
+#detailSolution,
+#detailNote{
+
+    margin-bottom:20px;
+
+    padding:10px;
+
+    background:#f9fafb;
+
+    border-radius:8px;
+
+}
