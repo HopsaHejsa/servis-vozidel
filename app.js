@@ -806,6 +806,8 @@ function startRealtime(){
 
         renderRepairs();
 
+         updateDashboard();
+
     });
 
 }
