@@ -1335,6 +1335,51 @@ ${item.stav || ""}
 
 }
 
+function initDarkMode(){
+
+    const toggle =
+        $("darkMode");
+
+    if(!toggle){
+
+        return;
+
+    }
+
+    const savedMode =
+        localStorage.getItem(
+            "darkMode"
+        );
+
+    if(savedMode === "true"){
+
+        document.body.classList.add(
+            "dark"
+        );
+
+        toggle.checked = true;
+
+    }
+
+    toggle.addEventListener(
+        "change",
+        ()=>{
+
+            document.body.classList.toggle(
+                "dark"
+            );
+
+            localStorage.setItem(
+                "darkMode",
+                toggle.checked
+            );
+
+        }
+    );
+
+}
+
+
 // VERSION
 
 function initVersion(){
