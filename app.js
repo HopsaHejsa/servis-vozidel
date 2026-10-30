@@ -701,7 +701,8 @@ if(
     });
 
 }
-            
+});
+    
             const repair = {
 
                 znacka:
