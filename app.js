@@ -1423,6 +1423,8 @@ document.addEventListener(
     initDetailActions();
 
     initVehicleHistory();
+
+    initDarkMode();
         
         initVersion();
 
