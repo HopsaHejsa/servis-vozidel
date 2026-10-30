@@ -17,6 +17,7 @@ import {
 }
 from "./config.js";
 
+let searchText = "";
 let repairs = [];
 let currentFilter = "open";
 let selectedRepairId = null;
