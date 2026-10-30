@@ -1509,7 +1509,7 @@ document.addEventListener(
 
         initFilters();
 
-initSearch();
+// initSearch();
         
         initCalendar();
 
