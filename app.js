@@ -653,25 +653,35 @@ document
 .querySelectorAll(".cost-row")
 .forEach(row=>{
 
+    const name =
+    row.querySelector(
+        ".cost-name"
+    )?.value || "";
+
+const price =
+    Number(
+
+        row.querySelector(
+            ".cost-price"
+        )?.value || 0
+
+    );
+
+if(
+    name.trim() !== ""
+    ||
+    price > 0
+){
+
     costs.push({
 
-        name:
-            row.querySelector(
-                ".cost-name"
-            )?.value || "",
+        name:name,
 
-        price:
-            Number(
-
-                row.querySelector(
-                    ".cost-price"
-                )?.value || 0
-
-            )
+        price:price
 
     });
 
-});
+}
             
             const repair = {
 
