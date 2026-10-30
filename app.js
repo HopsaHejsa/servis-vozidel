@@ -795,6 +795,49 @@ function clearForm(){
 
 }
 
+function initSpzAutocomplete(){
+
+    $("spz")
+    ?.addEventListener(
+        "blur",
+        ()=>{
+
+            const spz =
+                $("spz").value
+                .trim();
+
+            if(!spz){
+
+                return;
+
+            }
+
+            const vehicle =
+                repairs.find(
+                    repair =>
+
+                        repair.spz === spz
+                );
+
+            if(!vehicle){
+
+                return;
+
+            }
+
+            $("brand").value =
+                vehicle.znacka || "";
+
+            $("owner").value =
+                vehicle.majitel || "";
+
+            $("phone").value =
+                vehicle.telefon || "";
+
+        }
+    );
+
+}
 
 // REALTIME
 
