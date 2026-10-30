@@ -918,9 +918,10 @@ ${repair.stav || ""}
 function updateDashboard(){
 
 console.log(
-    "Dashboard repairs:",
-    repairs.length
-);
+        repairs.map(
+            repair => repair.stav
+        )
+    );
     
     const openCount =
         repairs.filter(
