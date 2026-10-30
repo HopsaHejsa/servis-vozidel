@@ -914,6 +914,47 @@ ${repair.stav || ""}
     });
 
 }
+
+function updateDashboard(){
+
+    const openCount =
+        repairs.filter(
+            repair =>
+
+                !repair.archiv
+                &&
+                repair.stav === "Otevřeno"
+        ).length;
+
+    const waitingCount =
+        repairs.filter(
+            repair =>
+
+                !repair.archiv
+                &&
+                repair.stav === "Čeká na díly"
+        ).length;
+
+    const doneCount =
+        repairs.filter(
+            repair =>
+
+                !repair.archiv
+                &&
+                repair.stav === "Hotovo"
+        ).length;
+
+    $("openCount").textContent =
+        openCount;
+
+    $("waitingCount").textContent =
+        waitingCount;
+
+    $("doneTodayCount").textContent =
+        doneCount;
+
+}
+
 function updateDashboard(){
 
     const openCount =
