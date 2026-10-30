@@ -1457,6 +1457,8 @@ document.addEventListener(
 
         initCalendar();
 
+initSpzAutocomplete();
+        
         initCosts();
 
         initSaveRepair();
