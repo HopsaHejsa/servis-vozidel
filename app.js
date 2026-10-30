@@ -917,6 +917,11 @@ ${repair.stav || ""}
 
 function updateDashboard(){
 
+console.log(
+    "Dashboard repairs:",
+    repairs.length
+);
+    
     const openCount =
         repairs.filter(
             repair =>
